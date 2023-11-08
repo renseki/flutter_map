@@ -13,12 +13,14 @@ sealed class BaseOverlayImage extends StatelessWidget {
   final ImageProvider imageProvider;
   final double opacity;
   final bool gaplessPlayback;
+  final Color? color;
 
   const BaseOverlayImage({
     super.key,
     required this.imageProvider,
     this.opacity = 1,
     this.gaplessPlayback = false,
+    this.color,
   });
 
   Widget _render(
@@ -34,7 +36,7 @@ sealed class BaseOverlayImage extends StatelessWidget {
         child: Image(
           image: imageProvider,
           fit: BoxFit.fill,
-          color: Color.fromRGBO(255, 255, 255, opacity),
+          color: color ?? Color.fromRGBO(255, 255, 255, opacity),
           colorBlendMode: BlendMode.modulate,
           gaplessPlayback: gaplessPlayback,
         ),
@@ -56,6 +58,7 @@ class OverlayImage extends BaseOverlayImage {
     required this.bounds,
     super.opacity,
     super.gaplessPlayback,
+    super.color,
   });
 
   @override
